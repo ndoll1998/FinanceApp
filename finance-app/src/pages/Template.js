@@ -1,0 +1,77 @@
+import React from 'react'
+// import Components
+import Header from '../components/Header'
+import Nav from '../components/Navigation'
+import Card from '../components/Card'
+import Slidable from '../components/Slidable'
+import StockInputForm from '../components/StockInputForm'
+import { SecondaryButton as SecButton } from '../components/Button'
+// import stylesheet
+import './Template.css'
+
+
+class Template extends React.Component {
+    state = {
+        stocks: [],
+        providers: []
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        // dynamically update state on props change
+        // build navigation items and copy provider-list
+        state.nav_items = props.stocks.map(stock => ({title: stock.ticker, to: stock.url}));
+        state.providers = props.providers;
+        // return state
+        return state
+    }
+
+    constructor(props) {
+        super(props);
+        // create references
+        this.loadStockPanel = React.createRef();
+    }
+
+    hideInputPanel = () => {
+        // hide input form
+        this.loadStockPanel.current.slideOut();
+    }
+
+    showInputPanel = () => { 
+        // show input form
+        this.loadStockPanel.current.slideIn(); 
+    }
+
+    render() { return (
+        <div>
+            <div className="left-span">
+                <div className="load-button-container">
+                    <SecButton className="load-button" onClick={this.showInputPanel}>
+                            Load Stock
+                    </SecButton>
+                </div>
+                <Nav className="nav-stock" items={this.state.nav_items}/>
+            </div>
+
+            <div className="right-span">
+                <Header><i className="fa fa-line-chart"></i> Finance App</Header>
+
+                <Slidable ref={this.loadStockPanel} className="nice-center-spot">
+                    <Card>
+                        <StockInputForm 
+                            providers={this.state.providers}
+                            onSubmit={this.props.onLoadStock}
+                        />
+                    </Card>
+                </Slidable>
+
+                <div className="main">
+                    { this.props.children }
+                </div>
+            </div>
+        </div>
+    )}
+
+
+}
+
+export default Template;

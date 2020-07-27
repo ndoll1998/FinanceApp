@@ -1,0 +1,50 @@
+/* left-span */
+
+.left-span {
+    position: absolute;
+    top: 0px; bottom: 0px;
+    left: 0px; width: 200px;
+
+    background-color: var(--secondary-color);
+}
+
+.left-span .load-button-container {
+    position: relative;
+
+    width: 100%;
+    height: 50px;
+}
+
+.left-span .load-button {
+    width: 80%;
+    height: 40px;
+
+    margin: 10px auto;
+}
+
+.left-span .nav-stock {
+    margin-top: 10px;
+}
+
+
+/* right-span */
+
+.right-span {
+    position: absolute;
+    top: 0px; bottom: 0px;
+    left: 200px; right: 0px;
+
+    background-color: var(--base-color);
+}
+
+.right-span .nice-center-spot {
+    position: absolute;
+    top: 150px; left: 50%;
+    transform: translateX(-50%);
+}
+
+.right-span .main {
+    overflow-y: auto;
+    padding: 15px;
+    height: calc(100% - 60px);
+}

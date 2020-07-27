@@ -1,0 +1,16 @@
+:root {
+  --base-color: #eee;
+  --primary-color: #fff;
+  --secondary-color: #24272e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  overflow: hidden;
+
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
