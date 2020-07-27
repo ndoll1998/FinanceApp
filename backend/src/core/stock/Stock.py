@@ -38,7 +38,7 @@ class Stock(Managable):
     def load_data(self, start=None, end=None):
         # handle time-span is None
         new_end = end if end is not None else dt.datetime.now()
-        new_start = start if start is not None else (new_end - dt.timedelta(days=30))
+        new_start = start if start is not None else (new_end - dt.timedelta(days=365))
         # check if time-span is already loaded
         if (self.start is not None) and (self.end is not None):
             if (new_start >= self.start) and (new_end <= self.end):
