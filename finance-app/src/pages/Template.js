@@ -19,7 +19,10 @@ class Template extends React.Component {
     static getDerivedStateFromProps(props, state) {
         // dynamically update state on props change
         // build navigation items and copy provider-list
-        state.nav_items = props.stocks.map(stock => ({title: stock.ticker, to: stock.url}));
+        state.nav_items = props.stocks.map(stock => ({
+            title: stock.ticker, to: stock.targetURL, 
+            onRemove: () => props.onRemoveStock(stock.ticker)
+        }));
         state.providers = props.providers;
         // return state
         return state
@@ -31,22 +34,15 @@ class Template extends React.Component {
         this.loadStockPanel = React.createRef();
     }
 
-    hideInputPanel = () => {
-        // hide input form
-        this.loadStockPanel.current.slideOut();
-    }
-
-    showInputPanel = () => { 
-        // show input form
-        this.loadStockPanel.current.slideIn(); 
-    }
+    hideInputPanel = () => { this.loadStockPanel.current.slideOut(); }
+    showInputPanel = () => { this.loadStockPanel.current.slideIn(); }
 
     render() { return (
         <div>
             <div className="left-span">
                 <div className="load-button-container">
                     <SecButton className="load-button" onClick={this.showInputPanel}>
-                            Load Stock
+                        Load
                     </SecButton>
                 </div>
                 <Nav className="nav-stock" items={this.state.nav_items}/>
