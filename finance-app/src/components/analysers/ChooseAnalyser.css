@@ -1,0 +1,20 @@
+.choose-analyser-container {
+    padding: 20px;
+    text-align: center;
+    font-size: larger;
+    width: 300px;
+    margin: auto;
+}
+
+.choose-analyser-container select { 
+    margin: 10px 0px;
+    padding: 5px;
+    width: 100%;
+
+    color: #444;
+    font-size: larger;
+}
+
+.choose-analyser-container .add-button {
+    padding: 5px;
+}

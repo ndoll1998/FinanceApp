@@ -1,11 +1,11 @@
 import React from 'react'
 // import Components
+import Card from '../components/utils/Card'
+import Slidable from '../components/utils/Slidable'
+import { SecondaryButton as SecButton } from '../components/utils/Button'
 import Header from '../components/Header'
 import Nav from '../components/Navigation'
-import Card from '../components/Card'
-import Slidable from '../components/Slidable'
 import StockInputForm from '../components/StockInputForm'
-import { SecondaryButton as SecButton } from '../components/Button'
 // import stylesheet
 import './Template.css'
 

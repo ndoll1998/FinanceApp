@@ -1,6 +1,7 @@
 import React from 'react';
 import {Router, Route } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
+import {v4 as uuid} from 'uuid'
 // import pages
 import Template from './pages/Template'
 import DetailView from './pages/DetailView'
@@ -25,22 +26,32 @@ class App extends React.Component {
     }
 
     loadStock = (ticker, provider) => {
-        var targetURL = "/full/" + ticker;
-        // update state and with it all components
-        var stock = {ticker, provider, targetURL}
-        this.setState({stocks: [...this.state.stocks, stock]})
-        // hide input panel
+        var targetURL;
+        // check if stock is already loaded
+        if (this.state.stocks.find(stock => stock.ticker === ticker)) {
+            // get index of stock
+            var i = this.state.stocks.findIndex(stock => stock.ticker === ticker);
+            // redirect to page
+            targetURL = this.state.stocks[i].targetURL;
+        } else {
+            targetURL = "/full/" + ticker;
+            // update state and with it all components
+            var stock = {ticker, provider, targetURL}
+            this.setState({stocks: [...this.state.stocks, stock]})
+        }
+        // hide input panel and load page
         this.template.current.hideInputPanel();
-        // load page
         this.history.push(targetURL);
     }
 
     removeStock = (ticker) => {
         // find stock with ticker
         var i = this.state.stocks.findIndex(stock => stock.ticker === ticker);
-        // remove stock at index
-        this.state.stocks.splice(i, 1);
-        this.setState({ stocks: this.state.stocks });
+        // copy stocks and remove stock at index
+        var stocks = this.state.stocks.slice();
+        stocks.splice(i, 1);
+        // update state
+        this.setState({ stocks });
     }
 
     render() {
@@ -55,7 +66,7 @@ class App extends React.Component {
                 >
                     {
                         this.state.stocks.map(stock => (
-                            <Route exact path={stock.targetURL} key={stock.ticker}>
+                            <Route exact path={stock.targetURL} key={uuid()}>
                                 <DetailView stock={stock} />
                             </Route>
                         ))

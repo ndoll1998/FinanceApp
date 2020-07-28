@@ -1,11 +1,9 @@
 import React from 'react'
 import Chart from 'react-apexcharts'
-// import components
-import Card from '../components/Card'
 // import stylesheet
-import './StockCard.css'
+import './Stock.css'
 
-class StockCard extends React.Component {
+class Stock extends React.Component {
     state = {
         stockInfo:{ ticker: "", provider: "" },
     }
@@ -62,10 +60,9 @@ class StockCard extends React.Component {
     }
   
     render() { 
-
         // return empty card if no data is given
         if (this.state.series === undefined)
-        return ( <Card>{this.state.stockInfo.ticker}</Card> )
+            return ( <div className="stock-container">{this.state.stockInfo.ticker}</div> )
         
         // create options
         var options = {
@@ -75,18 +72,20 @@ class StockCard extends React.Component {
         };
         // render
         return (
-            <Card>
-                { this.state.stockInfo.ticker }
-                <Chart 
-                    options={options}
-                    series={this.state.series}
-                    type="candlestick"
-                    width="100%"
-                    height="450px"
-                />
-            </Card>
+            <div className="stock-container">
+                <div className="inner">
+                    { this.state.stockInfo.ticker }
+                    <Chart 
+                        options={options}
+                        series={this.state.series}
+                        type="candlestick"
+                        width="100%"
+                        height="450px"
+                    />
+                </div>
+            </div>  
         );
     }
 }
 
-export default StockCard;
+export default Stock;

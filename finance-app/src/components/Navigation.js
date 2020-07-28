@@ -1,5 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import {v4 as uuid} from 'uuid'
+// import stylesheet
 import './Navigation.css'
 
 class NavItem extends React.Component {
@@ -29,16 +31,18 @@ class Nav extends React.Component {
         // call onRemove callback
         if (this.state.items[i].onRemove !== undefined)
             this.state.items[i].onRemove();
-        // remove item at give index
-        this.state.items.splice(i, 1);
-        this.setState({items: this.state.items});
+        // copy items and remove element at given index
+        var items = this.state.items.slice();
+        items.splice(i, 1);
+        // update state
+        this.setState({ items });
     }
 
     render() { return (
-        <ul className={"nav-bar " + this.props.className }>
+        <ul className={(this.props.className)? ("nav-bar " + this.props.className) : "nav-bar" }>
             { this.state.items.map((item, index) => 
                 <NavItem 
-                    key={item.title} 
+                    key={uuid()} 
                     attrs={item} 
                     remove={() => this.removeItemAtIndex(index)} 
                 />

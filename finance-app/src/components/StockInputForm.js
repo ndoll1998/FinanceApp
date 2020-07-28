@@ -1,5 +1,8 @@
 import React from 'react'
-import { PrimaryButton as PrimButton} from './Button'
+import {v4 as uuid} from 'uuid'
+// import components
+import { PrimaryButton as PrimButton } from './utils/Button'
+// import stylesheet
 import './StockInputForm.css'
 
 class StockInputForm extends React.Component {
@@ -24,10 +27,10 @@ class StockInputForm extends React.Component {
     }
 
     render() {return (
-        <div className={"stock-input-form"}>
+        <div className={"stock-input-container"}>
             <input ref={this.ticker_input} type="text" placeholder="Ticker" autoComplete="off"/><br/>                
             <select ref={this.provider_input}>
-                { this.props.providers.map(provider => <option key={provider}>{provider}</option>) }
+                { this.props.providers.map(provider => <option key={uuid()}>{provider}</option>) }
             </select>
             <PrimButton className="submit-button" onClick={this.onSubmit}>Load Stock</PrimButton>
         </div>
